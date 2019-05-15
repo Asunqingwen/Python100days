@@ -1,3 +1,4 @@
+import random
 from math import pow
 
 # 水仙花数
@@ -61,8 +62,42 @@ def fibonacci_sequence():
 		f, b = b, f + b
 
 
+# craps赌博游戏
+'''
+玩家掷两个骰子，每个骰子点数为1-6，如果第一次点数和为7或11，则玩家胜；如果点数和为2、3或12，则玩家输庄家胜。若和为其他点数，则记录第一次的点数和，玩家继续掷骰子，直至点数和等于第一次掷出的点数和则玩家胜；若掷出的点数和为7则庄家胜。含筹码！
+'''
+
+
+def craps_dubo():
+	chou_ma = int(input('请输入您手里有多少筹码：'))
+	while chou_ma > 0:
+		debt = int(input('请输入您要下注的筹码：'))
+		if debt > chou_ma:
+			print('您的筹码不够，请重新下注！')
+			continue
+		sum = random.randint(1, 6) + random.randint(1, 6)
+		if sum == 7 or sum == 11:
+			chou_ma += debt
+			print('该局玩家胜出，玩家现有筹码总数%d' % chou_ma)
+		elif sum == 2 or sum == 3 or sum == 12:
+			chou_ma -= debt
+			print('该局庄家胜出，玩家现有筹码总数%d' % chou_ma)
+		else:
+			while True:
+				sum1 = random.randint(1, 6) + random.randint(1, 6)
+				if sum1 == sum:
+					chou_ma += debt
+					print('该局玩家胜出，玩家现有筹码总数%d' % chou_ma)
+					break
+				elif sum1 == 7:
+					chou_ma -= debt
+					print('该局庄家胜出，玩家现有筹码总数%d' % chou_ma)
+					break
+
+
 if __name__ == '__main__':
 	# shui_xian_hua()
 	# wan_mei_shu()
 	# bai_qian_bai_ji()
-	fibonacci_sequence()
+	# fibonacci_sequence()
+	craps_dubo()
